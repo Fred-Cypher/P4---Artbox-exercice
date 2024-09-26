@@ -1,7 +1,11 @@
 <?php
+    require_once('bdd.php');
     require 'header.php';
-    require 'oeuvres.php';
+    
+
+    $oeuvres = $cnx->query('SELECT * FROM oeuvres');
 ?>
+
 <div id="liste-oeuvres">
     <?php foreach($oeuvres as $oeuvre): ?>
         <article class="oeuvre">
@@ -13,4 +17,5 @@
         </article>
     <?php endforeach; ?>
 </div>
+
 <?php require 'footer.php'; ?>
