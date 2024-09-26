@@ -1,4 +1,5 @@
 <?php
+require_once('bdd.php');
 
 if(
     empty($_POST['titre'])
@@ -9,4 +10,14 @@ if(
     )
 {
     header('Location: ajouter.php');
+} else {
+    $titre = htmlspecialchars($_POST['titre']);
+    $artiste = htmlspecialchars($_POST['artiste']);
+    $description = htmlspecialchars($_POST['description']);
+    $image = htmlspecialchars($_POST['image']);
+
+    $query = $cnx->prepare('INSERT INTO oeuvres (titre, artiste, description, image) VALUES (?, ? , ? , ?)');
+    $query->execute([$titre, $artiste, $description, $image]);
+
+    header('Location: oeuvre.php?id=' . $cnx->lastInsertId());
 }
